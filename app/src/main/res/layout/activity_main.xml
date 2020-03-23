@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightBlue"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/main_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:textSize="30sp"
+        android:text="@string/title"/>
+
+    <Button
+        android:id="@+id/take_picture_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="@string/take_picture"/>
+
+    <ImageView
+        android:id="@+id/restaurant_picture_image"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/restaurant_name_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:hint="@string/restaurant"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/address_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:hint="@string/address"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/food_type_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:hint="@string/food_type"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="@string/save"/>
+
+    <Button
+        android:id="@+id/list_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="@string/list"/>
+
+</LinearLayout>

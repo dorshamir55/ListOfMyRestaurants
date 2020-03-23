@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Ex1</string>
+    <string name="list">List</string>
+    <string name="save">Save</string>
+    <string name="take_picture">Take picture</string>
+    <string name="restaurant">Restaurant name</string>
+    <string name="address">Address</string>
+    <string name="title">My list of restaurants</string>
+    <string name="food_type">Food type</string>
+    <string name="save_restaurant">Restaurant saved!</string>
+    <string name="enter_name">Enter restaurant name</string>
+    <string name="enter_address">Enter address</string>
+    <string name="enter_type">Enter food type</string>
+    <string name="enter_picture">Please take picture</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm_remove">Are you sure you want to delete?</string>
+</resources>
