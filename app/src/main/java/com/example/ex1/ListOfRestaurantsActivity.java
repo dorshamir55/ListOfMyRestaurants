@@ -17,17 +17,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static com.example.ex1.RestaurantManager.FILE_NAME;
 
 
 public class ListOfRestaurantsActivity extends AppCompatActivity {
@@ -55,21 +47,16 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
             firstRegister();
         }*/
 
-        //restaurants.addAll(load());
         //Toast.makeText(this ,restaurants.get(0).getName(), Toast.LENGTH_SHORT).show();
-        //ListView listView = (ListView)findViewById(R.id.restaurant_list);
         final RestaurantManager manager = RestaurantManager.getInstance(this);
-        final RestaurantAdapter restaurantAdapter = new RestaurantAdapter(manager.getRestaurants());
+        restaurants = manager.getRestaurants();
+        final RestaurantAdapter restaurantAdapter = new RestaurantAdapter(restaurants);
         manager.updateRestaurants();
         restaurantAdapter.setListener(new RestaurantAdapter.MyRestaurantListener() {
             @Override
             public void onRestaurantClicked(int position, View view) {
                 Intent intent = new Intent(ListOfRestaurantsActivity.this, ShowRestaurantActivity.class);
                 Bundle extras = new Bundle();
-                /*extras.putString("PhotoPath", restaurants.get(position).getQualityPhoto());
-                extras.putString("Name", restaurants.get(position).getName());
-                extras.putString("Address", restaurants.get(position).getAddress());
-                extras.putString("FoodType", restaurants.get(position).getType());*/
                 extras.putInt("Position", position);
                 intent.putExtras(extras);
                 startActivity(intent);
@@ -87,7 +74,7 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 int fromPosition = viewHolder.getAdapterPosition();
                 int toPosition = target.getAdapterPosition();
-                Toast.makeText(ListOfRestaurantsActivity.this, manager.getRestaurants().size(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ListOfRestaurantsActivity.this, 0, Toast.LENGTH_SHORT).show();
                 Collections.swap(restaurants, fromPosition, toPosition);
                 recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
                 manager.updateRestaurants();
@@ -126,21 +113,6 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
                 });
                 confirmRemoveDialog.show();
             }
-
-            /*
-            @Override
-            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                super.clearView(recyclerView, viewHolder);
-                viewHolder.itemView.setAlpha(1.0f);
-            }
-
-            @Override
-            public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-                super.onSelectedChanged(viewHolder, actionState);
-                if (actionState == ACTION_STATE_DRAG) {
-                    viewHolder.itemView.setAlpha(0.5f);
-                }
-            }*/
         };
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
@@ -235,40 +207,6 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("registered", false);
         editor.apply();
-    }
+    }*/
 
-    public void save(){
-        try {
-            FileOutputStream fos = openFileOutput("restaurants", MODE_PRIVATE);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(restaurants);
-            oos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void load(){
-        //List<Restaurant> arr = new ArrayList<>();
-        //restaurants = new ArrayList<>();
-        try {
-            FileInputStream fis = openFileInput("restaurants");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            restaurants.addAll((ArrayList<Restaurant>)ois.readObject());
-            //arr = (ArrayList<Restaurant>)ois.readObject();
-            //Toast.makeText(this, arr.toString(), Toast.LENGTH_SHORT).show();
-            //Restaurant restaurant = (Restaurant)ois.readObject();
-            ois.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        //return arr;
-    }
-    */
 }

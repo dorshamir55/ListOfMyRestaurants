@@ -32,16 +32,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.System.out;
 
 public class MainActivity extends AppCompatActivity {
     private final int CAMERA_REQUEST = 1;
     private final int WRITE_PERMISSION_REQUEST = 1;
     private ImageView imageView;
     private Bitmap bitmap;
-    private Bitmap qualityBitmap;
+    //private Bitmap qualityBitmap;
     private Button listButton;
     private Button saveButton;
     private Button takePictureButton;
@@ -49,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText addressEt;
     private EditText foodTypeEt;
     private List<Restaurant> restaurants = new ArrayList<>();
+    private static int count = 0;
+    private String path;
+
+    File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +81,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "pic.jpg");
 
-                //file = new File(Environment.getExternalStorageDirectory(), "pic"+ count +".jpg");
-                //count++;
-                //Uri imageUri = FileProvider.getUriForFile(MainActivity.this,"com.example.ex1.provider", file);
+                file = new File(Environment.getExternalStorageDirectory(), "pic"+ count +".jpg");
+                Uri imageUri = FileProvider.getUriForFile(MainActivity.this,"com.example.ex1.provider", file);
                 //Toast.makeText(MainActivity.this, imageUri.toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                //intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
                 startActivityForResult(intent, CAMERA_REQUEST);
             }
         });
@@ -119,37 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (nameAssert && addressAssert && typeAssert && bitmapAssert) {
 
-                    /*try {
-                        FileInputStream fis = openFileInput("restaurants");
-                        ObjectInputStream ois = new ObjectInputStream(fis);
-                        restaurants = (ArrayList<Restaurant>)ois.readObject();
-                        //Toast.makeText(this, arr.toString(), Toast.LENGTH_SHORT).show();
-                        //Restaurant restaurant = (Restaurant)ois.readObject();
-                        ois.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }*/
-
-                    Restaurant restaurant = new Restaurant(restaurantName, address, foodType, bitmap, qualityBitmap);
+                    count++;
+                    Restaurant restaurant = new Restaurant(restaurantName, address, foodType, path, bitmap);
                     restaurants.add(restaurant);
-                    /*try {
-                        FileOutputStream fos = openFileOutput("restaurants", MODE_PRIVATE);
-                        ObjectOutputStream oos = new ObjectOutputStream(fos);
-                        oos.writeObject(restaurants);
-                        oos.close();
-                        restaurantNameEt.setText("");
-                        addressEt.setText("");
-                        foodTypeEt.setText("");
-                        imageView.setImageBitmap(null);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }*/
 
                     RestaurantManager manager = RestaurantManager.getInstance(MainActivity.this);
                     manager.addRestaurant(restaurant);
@@ -210,9 +189,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==CAMERA_REQUEST && resultCode==RESULT_OK){
-            //imageView.setImageDrawable(Drawable.createFromPath(file.getAbsolutePath()));
-            bitmap = (Bitmap)data.getExtras().get("data");
+            path = file.getAbsolutePath();
+            bitmap = BitmapFactory.decodeFile(path);
             imageView.setImageBitmap(bitmap);
+            //imageView.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
+            //imageView = BitmapFactory.decodeFile(file.getAbsolutePath()).compress(Bitmap.CompressFormat.JPEG, 50;
+            //bitmap = (Bitmap)data.getExtras().get("data");
+            //imageView.setImageBitmap(bitmap);
         }
     }
 }

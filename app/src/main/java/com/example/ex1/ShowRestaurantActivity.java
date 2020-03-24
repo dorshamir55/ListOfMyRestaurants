@@ -2,14 +2,11 @@ package com.example.ex1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,33 +33,11 @@ public class ShowRestaurantActivity extends AppCompatActivity {
         int size = restaurants.size();
         if(position < size){
 
-            //load();
-            name.setText(restaurants.get(position).getName().toString());
-            imageView.setImageBitmap(restaurants.get(position).getQualityPhoto());
-            address.setText(restaurants.get(position).getAddress().toString());
-            foodType.setText(restaurants.get(position).getType().toString());
-        }
-
-
-
-    }
-
-    /*
-    public void load(){
-        try {
-            FileInputStream fis = openFileInput("restaurants");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            restaurants.addAll((ArrayList<Restaurant>)ois.readObject());
-            ois.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            name.setText(restaurants.get(position).getName());
+            imageView.setImageBitmap(BitmapFactory.decodeFile(restaurants.get(position).getPath()));
+            address.setText(restaurants.get(position).getAddress());
+            foodType.setText(restaurants.get(position).getType());
         }
     }
-
-     */
 
 }

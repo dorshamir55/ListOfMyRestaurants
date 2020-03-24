@@ -1,5 +1,6 @@
 package com.example.ex1;
 
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         holder.restaurantTv.setText(restaurant.getName());
         holder.addressTv.setText(restaurant.getAddress());
         holder.foodTypeTv.setText(restaurant.getType());
-        holder.restaurantIv.setImageBitmap(restaurant.getPhoto());
+        holder.restaurantIv.setImageBitmap(restaurants.get(position).getPhoto());
     }
 
     @Override

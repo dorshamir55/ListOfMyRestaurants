@@ -10,15 +10,17 @@ public class Restaurant implements Serializable {
     private String name;
     private String address;
     private String type;
+    private String path;
     transient private Bitmap photo;
-    transient private Bitmap qualityPhoto;
+    //transient private Bitmap qualityPhoto;
 
-    public Restaurant(String name, String address, String type, Bitmap photo, Bitmap qualityBitmap) {
+    public Restaurant(String name, String address, String type, String path, Bitmap photo) {
         this.name = name;
         this.address = address;
         this.type = type;
+        this.path = path;
         this.photo = photo;
-        this.qualityPhoto = qualityBitmap;
+        //this.qualityPhoto = qualityBitmap;
     }
 
     public String getName() {
@@ -41,21 +43,6 @@ public class Restaurant implements Serializable {
         return type;
     }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", type='" + type + '\'' +
-                ", photo=" + photo +
-                ", qualityPhoto=" + qualityPhoto +
-                '}';
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Bitmap getPhoto() {
         return photo;
     }
@@ -64,26 +51,37 @@ public class Restaurant implements Serializable {
         this.photo = photo;
     }
 
-    public Bitmap getQualityPhoto() {
-        return qualityPhoto;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setQualityPhoto(Bitmap photo) {
-        this.qualityPhoto = qualityPhoto;
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", type='" + type + '\'' +
+                ", path='" + path + '\'' +
+                ", photo=" + photo +
+                '}';
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException{
         photo.compress(Bitmap.CompressFormat.JPEG, 50, out);
-        //qualityPhoto.compress(Bitmap.CompressFormat.JPEG, 100, out);
-        qualityPhoto = photo;
 
         out.defaultWriteObject();
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException{
         photo = BitmapFactory.decodeStream(in);
-        //qualityPhoto = BitmapFactory.decodeStream(in);
-        qualityPhoto = photo;
 
         in.defaultReadObject();
     }
