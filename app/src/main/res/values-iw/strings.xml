@@ -7,13 +7,13 @@
     <string name="restaurant">שם מסעדה</string>
     <string name="address">כתובת</string>
     <string name="title">רשימת המסעדות שלי</string>
-    <string name="food_type">סוג אוכל</string>
     <string name="save_restaurant">מסעדה נשמרה!</string>
     <string name="enter_name">הכנס שם מסעדה</string>
     <string name="enter_address">הכנס כתובת</string>
-    <string name="enter_type">הכנס סוג אוכל</string>
     <string name="enter_picture">צלם תמונה בבקשה</string>
     <string name="yes">כן</string>
     <string name="no">לא</string>
     <string name="confirm_remove">אתה בטוח שאתה רוצה למחוק?</string>
+    <string name="enter_phone_number">הכנס מספר טלפון</string>
+    <string name="phone_number">מספר טלפון</string>
 </resources>

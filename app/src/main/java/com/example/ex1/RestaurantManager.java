@@ -2,6 +2,7 @@ package com.example.ex1;
 
 import android.content.Context;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -61,9 +62,15 @@ public class RestaurantManager {
 
     public void removeRestaurant(int position){
         if(position<restaurants.size()){
+            removePictureFromExternalStorage(position);
             restaurants.remove(position);
         }
         saveRestaurants();
+    }
+
+    public void removePictureFromExternalStorage(int position){
+        File file = new File(restaurants.get(position).getPath());
+        file.delete();
     }
 
     public void saveRestaurants(){

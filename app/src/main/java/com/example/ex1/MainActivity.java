@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private Button takePictureButton;
     private EditText restaurantNameEt;
     private EditText addressEt;
-    private EditText foodTypeEt;
+    private EditText phoneNumberEt;
     private List<Restaurant> restaurants = new ArrayList<>();
     private static int count = 0;
     private String path;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.restaurant_picture_image);
         restaurantNameEt = (EditText) findViewById(R.id.restaurant_name_et);
         addressEt = ( EditText) findViewById(R.id.address_et);
-        foodTypeEt = (EditText) findViewById(R.id.food_type_et);
+        phoneNumberEt = (EditText) findViewById(R.id.phone_number_et);
         listButton = (Button) findViewById(R.id.list_btn);
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String restaurantName = restaurantNameEt.getText().toString();
                 String address = addressEt.getText().toString();
-                String foodType = foodTypeEt.getText().toString();
+                String phoneNumber = phoneNumberEt.getText().toString();
 
-                boolean nameAssert, addressAssert, typeAssert, bitmapAssert;
+                boolean nameAssert, addressAssert, phoneNumberAssert, bitmapAssert;
                 if (restaurantName.trim().length() == 0) { //trim=remove spaces to avoid blank name
                     nameAssert = false;
                     restaurantNameEt.setError(getString(R.string.enter_name));
@@ -112,11 +112,11 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     addressAssert = true;
                 }
-                if (foodType.trim().length() == 0) { //trim=remove spaces to avoid blank name
-                    typeAssert = false;
-                    foodTypeEt.setError(getString(R.string.enter_type));
+                if (phoneNumber.trim().length() == 0) { //trim=remove spaces to avoid blank name
+                    phoneNumberAssert = false;
+                    phoneNumberEt.setError(getString(R.string.enter_phone_number));
                 } else {
-                    typeAssert = true;
+                    phoneNumberAssert = true;
                 }
                 if (bitmap==null) { //trim=remove spaces to avoid blank name
                     bitmapAssert = false;
@@ -124,10 +124,10 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     bitmapAssert = true;
                 }
-                if (nameAssert && addressAssert && typeAssert && bitmapAssert) {
+                if (nameAssert && addressAssert && phoneNumberAssert && bitmapAssert) {
 
                     count++;
-                    Restaurant restaurant = new Restaurant(restaurantName, address, foodType, path, bitmap);
+                    Restaurant restaurant = new Restaurant(restaurantName, address, phoneNumber, path, bitmap);
                     restaurants.add(restaurant);
 
                     RestaurantManager manager = RestaurantManager.getInstance(MainActivity.this);
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
                     restaurantNameEt.setText("");
                     addressEt.setText("");
-                    foodTypeEt.setText("");
+                    phoneNumberEt.setText("");
                     imageView.setImageBitmap(null);
 
                     Toast.makeText(MainActivity.this, R.string.save_restaurant, Toast.LENGTH_SHORT).show();
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 listButton.setVisibility(View.VISIBLE);
                 restaurantNameEt.setVisibility(View.VISIBLE);
                 addressEt.setVisibility(View.VISIBLE);
-                foodTypeEt.setVisibility(View.VISIBLE);
+                phoneNumberEt.setVisibility(View.VISIBLE);
             }
         }
         else {
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             listButton.setVisibility(View.VISIBLE);
             restaurantNameEt.setVisibility(View.VISIBLE);
             addressEt.setVisibility(View.VISIBLE);
-            foodTypeEt.setVisibility(View.VISIBLE);
+            phoneNumberEt.setVisibility(View.VISIBLE);
         }
     }
 
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 listButton.setVisibility(View.VISIBLE);
                 restaurantNameEt.setVisibility(View.VISIBLE);
                 addressEt.setVisibility(View.VISIBLE);
-                foodTypeEt.setVisibility(View.VISIBLE);
+                phoneNumberEt.setVisibility(View.VISIBLE);
             }
         }
     }

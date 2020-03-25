@@ -1,5 +1,6 @@
 package com.example.ex1;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             addressTv = itemView.findViewById(R.id.address_content);
             foodTypeTv = itemView.findViewById(R.id.food_type_content);
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,7 +74,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         Restaurant restaurant = restaurants.get(position);
         holder.restaurantTv.setText(restaurant.getName());
         holder.addressTv.setText(restaurant.getAddress());
-        holder.foodTypeTv.setText(restaurant.getType());
+        holder.foodTypeTv.setText(restaurant.getPhoneNumber());
         holder.restaurantIv.setImageBitmap(restaurants.get(position).getPhoto());
     }
 

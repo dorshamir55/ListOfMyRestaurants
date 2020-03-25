@@ -9,18 +9,16 @@ import java.io.Serializable;
 public class Restaurant implements Serializable {
     private String name;
     private String address;
-    private String type;
+    private String phoneNumber;
     private String path;
     transient private Bitmap photo;
-    //transient private Bitmap qualityPhoto;
 
-    public Restaurant(String name, String address, String type, String path, Bitmap photo) {
+    public Restaurant(String name, String address, String phoneNumber, String path, Bitmap photo) {
         this.name = name;
         this.address = address;
-        this.type = type;
+        this.phoneNumber = phoneNumber;
         this.path = path;
         this.photo = photo;
-        //this.qualityPhoto = qualityBitmap;
     }
 
     public String getName() {
@@ -39,8 +37,12 @@ public class Restaurant implements Serializable {
         this.address = address;
     }
 
-    public String getType() {
-        return type;
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Bitmap getPhoto() {
@@ -49,10 +51,6 @@ public class Restaurant implements Serializable {
 
     public void setPhoto(Bitmap photo) {
         this.photo = photo;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getPath() {
@@ -68,14 +66,14 @@ public class Restaurant implements Serializable {
         return "Restaurant{" +
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", type='" + type + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", path='" + path + '\'' +
                 ", photo=" + photo +
                 '}';
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException{
-        photo.compress(Bitmap.CompressFormat.JPEG, 50, out);
+        photo.compress(Bitmap.CompressFormat.JPEG, 10, out);
 
         out.defaultWriteObject();
     }
