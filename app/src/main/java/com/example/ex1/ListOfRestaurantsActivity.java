@@ -89,6 +89,7 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
                 closeConfirmRemove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        restaurantAdapter.notifyItemRangeChanged(viewHolder.getAdapterPosition(), restaurantAdapter.getItemCount());
                         confirmRemoveDialog.dismiss();
                     }
                 });
@@ -108,6 +109,7 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
                 noButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        restaurantAdapter.notifyItemRangeChanged(viewHolder.getAdapterPosition(), restaurantAdapter.getItemCount());
                         confirmRemoveDialog.dismiss();
                     }
                 });
