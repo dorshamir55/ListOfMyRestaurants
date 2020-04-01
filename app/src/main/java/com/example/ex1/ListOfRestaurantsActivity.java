@@ -51,7 +51,7 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
         final RestaurantManager manager = RestaurantManager.getInstance(this);
         restaurants = manager.getRestaurants();
         final RestaurantAdapter restaurantAdapter = new RestaurantAdapter(restaurants);
-        manager.updateRestaurants();
+        //manager.updateRestaurants();
         restaurantAdapter.setListener(new RestaurantAdapter.MyRestaurantListener() {
             @Override
             public void onRestaurantClicked(int position, View view) {
@@ -77,7 +77,7 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
                 //Toast.makeText(ListOfRestaurantsActivity.this, 0, Toast.LENGTH_SHORT).show();
                 Collections.swap(restaurants, fromPosition, toPosition);
                 recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
-                manager.updateRestaurants();
+                //manager.updateRestaurants();
 
                 return false;
             };
@@ -98,9 +98,7 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         manager.removeRestaurant(viewHolder.getAdapterPosition());
-                        manager.updateRestaurants();
-                        //restaurants.remove(viewHolder.getAdapterPosition());
-                        //save();
+                        //manager.updateRestaurants();
                         restaurantAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                         confirmRemoveDialog.dismiss();
                     }
@@ -122,12 +120,15 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
         recyclerView.setAdapter(restaurantAdapter);
     }
 
-    /*
+
     @Override
     protected void onPause() {
         super.onPause();
         Log.d("A", "onPauseMessage, SAVE");
-        try {
+        RestaurantManager manager = RestaurantManager.getInstance(this);
+        manager.updateRestaurants();
+    }
+    /*  try {
             FileOutputStream fos = openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(restaurants);

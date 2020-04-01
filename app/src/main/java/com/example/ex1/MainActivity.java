@@ -8,11 +8,13 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private final int WRITE_PERMISSION_REQUEST = 1;
     private ImageView imageView;
     private Bitmap bitmap;
-    //private Bitmap qualityBitmap;
     private Button listButton;
     private Button saveButton;
     private Button takePictureButton;
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText addressEt;
     private EditText phoneNumberEt;
     private List<Restaurant> restaurants = new ArrayList<>();
-    private static int count = 0;
     private String path;
+    private int count;
 
     File file;
 
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        count = prefs.getInt("counter", 0);
 
         imageView = (ImageView) findViewById(R.id.restaurant_picture_image);
         restaurantNameEt = (EditText) findViewById(R.id.restaurant_name_et);
@@ -127,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 if (nameAssert && addressAssert && phoneNumberAssert && bitmapAssert) {
 
                     count++;
+                    saveCount();
                     Restaurant restaurant = new Restaurant(restaurantName, address, phoneNumber, path, bitmap);
                     restaurants.add(restaurant);
 
@@ -167,6 +172,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private int firstRegister() {
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("registered", false);
+        editor.apply();
+        return 0;
+    }
+
+    private void saveCount(){
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("counter", count);
+        editor.apply();
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -188,14 +208,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==CAMERA_REQUEST && resultCode==RESULT_OK){
-            path = file.getAbsolutePath();
-            bitmap = BitmapFactory.decodeFile(path);
-            imageView.setImageBitmap(bitmap);
-            //imageView.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
-            //imageView = BitmapFactory.decodeFile(file.getAbsolutePath()).compress(Bitmap.CompressFormat.JPEG, 50;
-            //bitmap = (Bitmap)data.getExtras().get("data");
-            //imageView.setImageBitmap(bitmap);
+        if(requestCode==CAMERA_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                path = file.getAbsolutePath();
+                bitmap = BitmapFactory.decodeFile(path);
+                bitmap = ThumbnailUtils.extractThumbnail(bitmap, imageView.getWidth(), imageView.getHeight());
+                imageView.setImageBitmap(bitmap);
+                //imageView.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
+                //imageView = BitmapFactory.decodeFile(file.getAbsolutePath()).compress(Bitmap.CompressFormat.JPEG, 50;
+                //bitmap = (Bitmap)data.getExtras().get("data");
+                //imageView.setImageBitmap(bitmap);
+            } else {
+                try {
+                    //manager.removeRestaurant(viewHolder.getAdapterPosition());
+                    
+                    file.delete();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                file = null;
+                bitmap = null;
+                imageView.setImageDrawable(null);
+            }
         }
     }
 }

@@ -73,7 +73,7 @@ public class Restaurant implements Serializable {
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException{
-        photo.compress(Bitmap.CompressFormat.JPEG, 10, out);
+        photo.compress(Bitmap.CompressFormat.JPEG, 50, out);
 
         out.defaultWriteObject();
     }

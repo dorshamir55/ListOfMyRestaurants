@@ -41,16 +41,7 @@
         android:layout_gravity="center"
         android:visibility="invisible"
         android:hint="@string/restaurant"
-        android:inputType="textPersonName"/>
-
-    <EditText
-        android:id="@+id/address_et"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        android:hint="@string/address"
-        android:inputType="textPostalAddress"/>
+        android:inputType="text"/>
 
     <EditText
         android:id="@+id/phone_number_et"
@@ -61,12 +52,25 @@
         android:hint="@string/phone_number"
         android:inputType="phone"/>
 
+
+    <EditText
+        android:id="@+id/address_et"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:hint="@string/address"
+        android:inputType="text"/>
+
+
+
     <Button
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_shape"
         android:visibility="invisible"
+        android:layout_marginBottom="10dp"
         android:text="@string/save"/>
 
     <Button
