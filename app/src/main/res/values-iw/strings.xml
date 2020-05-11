@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ex1</string>
+    <string name="app_name">רשימת המסעדות שלי</string>
     <string name="list">רשימה</string>
     <string name="save">שמור</string>
     <string name="take_picture">צלם תמונה</string>

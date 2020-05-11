@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ex1</string>
+    <string name="app_name">List of my restaurants</string>
     <string name="list">List</string>
     <string name="save">Save</string>
     <string name="take_picture">Take picture</string>
