@@ -18,4 +18,5 @@
     <string name="phone_number">מספר טלפון</string>
     <string name="add_restaurant">הוסף מסעדה</string>
     <string name="back">חזור</string>
+    <string name="permission_msg">אין לך הרשאות לצלם תמונה</string>
 </resources>

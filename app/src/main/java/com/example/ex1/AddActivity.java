@@ -127,6 +127,7 @@ public class AddActivity extends AppCompatActivity {
                     phoneNumberEt.setText("");
                     imageView.setImageBitmap(null);
 
+                    startActivity(new Intent(AddActivity.this, ListOfRestaurantsActivity.class));
                     Toast.makeText(AddActivity.this, R.string.save_restaurant, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -176,7 +177,7 @@ public class AddActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode==WRITE_PERMISSION_REQUEST){
             if(grantResults[0]!=PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "Can't take picture", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getResources().getString(R.string.permission_msg), Toast.LENGTH_SHORT).show();
             }
             else{
                 takePictureButton.setVisibility(View.VISIBLE);
