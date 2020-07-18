@@ -8,4 +8,6 @@
     <color name="blue">#0062FF</color>
     <color name="darkBlue">#0033FF</color>
     <color name="veryDarkBlue">#0F1234</color>
+    <color name="barColor">#00ACC1</color>
+
 </resources>

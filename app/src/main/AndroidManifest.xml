@@ -25,7 +25,7 @@
 
         <activity android:name=".ShowRestaurantActivity" />
         <activity android:name=".ListOfRestaurantsActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".AddActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

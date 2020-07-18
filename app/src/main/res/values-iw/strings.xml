@@ -16,4 +16,6 @@
     <string name="confirm_remove">אתה בטוח שאתה רוצה למחוק?</string>
     <string name="enter_phone_number">הכנס מספר טלפון</string>
     <string name="phone_number">מספר טלפון</string>
+    <string name="add_restaurant">הוסף מסעדה</string>
+    <string name="back">חזור</string>
 </resources>

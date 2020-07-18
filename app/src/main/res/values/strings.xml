@@ -15,4 +15,6 @@
     <string name="confirm_remove">Are you sure you want to delete?</string>
     <string name="enter_phone_number">Enter phone number</string>
     <string name="phone_number">Phone number</string>
+    <string name="add_restaurant">Add restaurant</string>
+    <string name="back">Back</string>
 </resources>

@@ -23,7 +23,7 @@ public class OpeningScreenActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                OpeningScreenActivity.this.startActivity(new Intent(OpeningScreenActivity.this, MainActivity.class));
+                OpeningScreenActivity.this.startActivity(new Intent(OpeningScreenActivity.this, ListOfRestaurantsActivity.class));
 
                 OpeningScreenActivity.this.finish();
             }

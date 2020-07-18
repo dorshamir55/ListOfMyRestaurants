@@ -1,19 +1,14 @@
 package com.example.ex1;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
@@ -27,21 +22,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.System.out;
-
-public class MainActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity {
     private final int CAMERA_REQUEST = 1;
     private final int WRITE_PERMISSION_REQUEST = 1;
     private ImageView imageView;
@@ -61,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add);
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         count = prefs.getInt("counter", 0);
@@ -70,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
         restaurantNameEt = (EditText) findViewById(R.id.restaurant_name_et);
         addressEt = ( EditText) findViewById(R.id.address_et);
         phoneNumberEt = (EditText) findViewById(R.id.phone_number_et);
-        listButton = (Button) findViewById(R.id.list_btn);
+        listButton = (Button) findViewById(R.id.back_btn);
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (MainActivity.this, ListOfRestaurantsActivity.class);
+                Intent intent = new Intent (AddActivity.this, ListOfRestaurantsActivity.class);
                 startActivity(intent);
             }
         });
@@ -86,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 //file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "pic.jpg");
 
                 file = new File(Environment.getExternalStorageDirectory(), "pic"+ count +".jpg");
-                Uri imageUri = FileProvider.getUriForFile(MainActivity.this,"com.example.ex1.provider", file);
+                Uri imageUri = FileProvider.getUriForFile(AddActivity.this,"com.example.ex1.provider", file);
                 //Toast.makeText(MainActivity.this, imageUri.toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -124,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (bitmap==null) { //trim=remove spaces to avoid blank name
                     bitmapAssert = false;
-                    Toast.makeText(MainActivity.this, R.string.enter_picture, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, R.string.enter_picture, Toast.LENGTH_SHORT).show();
                 } else {
                     bitmapAssert = true;
                 }
@@ -135,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     Restaurant restaurant = new Restaurant(restaurantName, address, phoneNumber, path, bitmap);
                     restaurants.add(restaurant);
 
-                    RestaurantManager manager = RestaurantManager.getInstance(MainActivity.this);
+                    RestaurantManager manager = RestaurantManager.getInstance(AddActivity.this);
                     manager.addRestaurant(restaurant);
 
                     restaurantNameEt.setText("");
@@ -143,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     phoneNumberEt.setText("");
                     imageView.setImageBitmap(null);
 
-                    Toast.makeText(MainActivity.this, R.string.save_restaurant, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, R.string.save_restaurant, Toast.LENGTH_SHORT).show();
                 }
             }
         });

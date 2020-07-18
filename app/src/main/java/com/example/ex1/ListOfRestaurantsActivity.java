@@ -6,16 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,14 +23,22 @@ import java.util.List;
 public class ListOfRestaurantsActivity extends AppCompatActivity {
     List<Restaurant> restaurants = new ArrayList<>();
     TextView closeConfirmRemove;
-    Button yesButton;
-    Button noButton;
+    Button yesButton, noButton;
+    FloatingActionButton addButton;
     Dialog confirmRemoveDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_restaurants);
+
+        addButton = findViewById(R.id.floatingButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ListOfRestaurantsActivity.this, AddActivity.class));
+            }
+        });
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);

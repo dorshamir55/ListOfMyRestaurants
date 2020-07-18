@@ -83,7 +83,6 @@ public class ShowRestaurantActivity extends AppCompatActivity {
                 }
             });
         }
-        Toast.makeText(ShowRestaurantActivity.this ,restaurants.get(0).getPath(), Toast.LENGTH_SHORT).show();
 
     }
 
