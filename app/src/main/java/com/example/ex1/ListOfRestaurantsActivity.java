@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -107,6 +108,7 @@ public class ListOfRestaurantsActivity extends AppCompatActivity {
                         //manager.updateRestaurants();
                         restaurantAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                         confirmRemoveDialog.dismiss();
+                        Toast.makeText(ListOfRestaurantsActivity.this, getResources().getString(R.string.restaurant_deleted), Toast.LENGTH_SHORT).show();
                     }
                 });
                 noButton = (Button) confirmRemoveDialog.findViewById(R.id.no_btn);
